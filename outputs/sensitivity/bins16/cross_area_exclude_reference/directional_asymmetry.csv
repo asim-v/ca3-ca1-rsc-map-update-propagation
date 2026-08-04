@@ -1,0 +1,5 @@
+forward_connection,reverse_connection,lag_same_direction_traversals,mean_forward_minus_reverse_delta_mse,mice_forward_greater,n_mice,exact_two_sided_sign_flip_p
+CA3->CA1,CA1->CA3,0,-0.0018491657708146446,2,4,0.875
+CA3->CA1,CA1->CA3,1,-0.0027295050476043702,2,4,0.875
+CA1->RSC,RSC->CA1,0,0.010822476818360183,1,4,1.0
+CA1->RSC,RSC->CA1,1,0.03204934994494592,2,4,0.5

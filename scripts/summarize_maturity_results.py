@@ -24,6 +24,28 @@ STATUS_ORDER = {
 }
 
 
+def benjamini_hochberg(p_values: np.ndarray) -> np.ndarray:
+    order = np.argsort(p_values)
+    ranked = p_values[order]
+    adjusted = ranked * len(ranked) / np.arange(1, len(ranked) + 1)
+    adjusted = np.minimum.accumulate(adjusted[::-1])[::-1]
+    result = np.empty_like(adjusted)
+    result[order] = np.minimum(adjusted, 1.0)
+    return result
+
+
+def add_early_registration(table: pd.DataFrame) -> pd.DataFrame:
+    table = table.copy()
+    table["early_combined_null_p"] = table[
+        ["early_identity_null_p", "early_spatial_null_p"]
+    ].max(axis=1)
+    table["early_combined_null_q"] = benjamini_hochberg(
+        table["early_combined_null_p"].to_numpy(float)
+    )
+    table["early_registered"] = table["early_combined_null_q"].le(0.05)
+    return table
+
+
 def date_from_filename(filename: str) -> str:
     match = re.search(r"ses-(\d{8})", filename)
     return match.group(1)[4:] if match else filename
@@ -49,10 +71,7 @@ def paired_transition_summary(table: pd.DataFrame, status_column: str, midpoint_
 
 
 def make_figure(fits: pd.DataFrame, controlled: pd.DataFrame, output: Path) -> None:
-    fits = fits.copy()
-    fits["early_registered"] = (
-        fits["early_identity_null_p"].le(0.05) & fits["early_spatial_null_p"].le(0.05)
-    )
+    fits = add_early_registration(fits)
     row_table = fits[KEYS].drop_duplicates().sort_values(KEYS).reset_index(drop=True)
     matrix = np.zeros((len(row_table), len(REGIONS)), dtype=int)
     early = np.zeros_like(matrix, dtype=bool)
@@ -175,11 +194,8 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    fits = pd.read_csv(args.fits)
+    fits = add_early_registration(pd.read_csv(args.fits))
     controlled = pd.read_csv(args.controlled)
-    fits["early_registered"] = (
-        fits["early_identity_null_p"].le(0.05) & fits["early_spatial_null_p"].le(0.05)
-    )
     fits["early_margin"] = fits["early_five_mean"] - fits[
         ["early_identity_null_q95", "early_spatial_null_q95"]
     ].max(axis=1)

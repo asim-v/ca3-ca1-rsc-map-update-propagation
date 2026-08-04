@@ -8,8 +8,9 @@
       inspecting the regional ordering result.
 - [x] M5 — Produce position-, direction-, speed-, and occupancy-matched regional
       maze scores.
-- [ ] M6 — Run onset and cross-area lag analyses with prespecified nulls. Onset,
-      spatial, identity, traversal-order, and measured-behavior controls are
-      complete; cross-area lag analysis remains.
-- [ ] M7 — Replicate across animals and complete sensitivity analyses.
+- [x] M6 — Run onset and cross-area lag analyses with prespecified nulls.
+- [x] M7 — Replicate across animals and complete within-dataset sensitivity
+      analyses.
 - [ ] M8 — Build figures and manuscript only if the effect survives controls.
+      Figures are complete; manuscript drafting is deferred until the
+      early-CA1 result is checked for literature novelty or independent data.

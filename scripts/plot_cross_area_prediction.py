@@ -77,7 +77,10 @@ def main() -> None:
         ax.tick_params(axis="x", rotation=25)
         ax.spines[["top", "right"]].set_visible(False)
     axes[0].set_ylabel("LOOCV MSE reduction (positive = predictive gain)")
-    figure.suptitle("Cross-region map similarity is contemporaneously shared, not directionally lagged", fontsize=13)
+    figure.suptitle(
+        "Reference-independent cross-area prediction is heterogeneous and not lagged",
+        fontsize=13,
+    )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     figure.savefig(args.output, dpi=180)
     plt.close(figure)

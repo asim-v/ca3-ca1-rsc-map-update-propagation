@@ -1,0 +1,49 @@
+configuration,connection,lag_same_direction_traversals,mouse_level_mean_delta_mse,mice_positive,bh_q_positive_gain,supported_positive_gain
+primary,CA1->CA3,0,-0.0314053153212292,0,1.0,False
+primary,CA1->CA3,1,-0.046322920809287,0,1.0,False
+primary,CA1->RSC,0,0.0683791728018359,3,0.0007998400319936,True
+primary,CA1->RSC,1,-0.0167574991305454,1,1.0,False
+primary,CA3->CA1,0,-0.0166242546415565,2,1.0,False
+primary,CA3->CA1,1,-0.0455797314109011,0,1.0,False
+primary,RSC->CA1,0,0.0167321046358932,2,0.0007998400319936,False
+primary,RSC->CA1,1,-0.0401906210184452,0,1.0,False
+16 position bins,CA1->CA3,0,-0.0168200283387351,1,1.0,False
+16 position bins,CA1->CA3,1,-0.0322110880107811,0,1.0,False
+16 position bins,CA1->RSC,0,0.0308587151991702,2,0.0019990004997501,False
+16 position bins,CA1->RSC,1,-0.0049821741576872,2,1.0,False
+16 position bins,CA3->CA1,0,-0.0186691941095497,1,1.0,False
+16 position bins,CA3->CA1,1,-0.0349405930583855,0,1.0,False
+16 position bins,RSC->CA1,0,0.02003623838081,4,0.0019990004997501,True
+16 position bins,RSC->CA1,1,-0.0370315241026331,0,1.0,False
+32 position bins,CA1->CA3,0,-0.0144926430558794,2,1.0,False
+32 position bins,CA1->CA3,1,-0.0231595947317367,0,1.0,False
+32 position bins,CA1->RSC,0,0.0435359219484759,2,0.0013326669998334,False
+32 position bins,CA1->RSC,1,-0.0362133562051495,1,1.0,False
+32 position bins,CA3->CA1,0,0.0057720461311021,2,0.0013326669998334,False
+32 position bins,CA3->CA1,1,-0.023037535475137,0,1.0,False
+32 position bins,RSC->CA1,0,0.003211285516631,1,0.0013326669998334,False
+32 position bins,RSC->CA1,1,-0.0447366217007666,0,1.0,False
+speed > 5 cm/s,CA1->CA3,0,-0.0233751878588097,2,1.0,False
+speed > 5 cm/s,CA1->CA3,1,-0.0373924756214396,0,1.0,False
+speed > 5 cm/s,CA1->RSC,0,0.011577050269277,2,0.0013326669998334,False
+speed > 5 cm/s,CA1->RSC,1,0.0005958321306811,2,0.0013326669998334,False
+speed > 5 cm/s,CA3->CA1,0,-0.0157749952055452,1,1.0,False
+speed > 5 cm/s,CA3->CA1,1,-0.0334947473973282,0,1.0,False
+speed > 5 cm/s,RSC->CA1,0,0.0090617577761458,2,0.0013326669998334,False
+speed > 5 cm/s,RSC->CA1,1,-0.0413103001715103,0,1.0,False
+8 late-reference traversals,CA1->CA3,0,-0.0242195708161378,1,1.0,False
+8 late-reference traversals,CA1->CA3,1,-0.0263450481543682,0,1.0,False
+8 late-reference traversals,CA1->RSC,0,0.0056758251906201,2,0.0019990004997501,False
+8 late-reference traversals,CA1->RSC,1,0.0046923057059627,3,0.0019990004997501,True
+8 late-reference traversals,CA3->CA1,0,-0.0222342256150118,1,1.0,False
+8 late-reference traversals,CA3->CA1,1,-0.0299259052380377,0,1.0,False
+8 late-reference traversals,RSC->CA1,0,-0.0217749142322749,1,1.0,False
+8 late-reference traversals,RSC->CA1,1,-0.0376256807790092,0,1.0,False
+12 late-reference traversals,CA1->CA3,0,-0.0151730822061965,1,1.0,False
+12 late-reference traversals,CA1->CA3,1,-0.0296567763283262,1,1.0,False
+12 late-reference traversals,CA1->RSC,0,0.0178504069952563,1,0.0019990004997501,False
+12 late-reference traversals,CA1->RSC,1,-0.051001509547602,0,1.0,False
+12 late-reference traversals,CA3->CA1,0,-0.0164231432018875,1,1.0,False
+12 late-reference traversals,CA3->CA1,1,-0.0362392060195913,0,1.0,False
+12 late-reference traversals,RSC->CA1,0,0.0093616966938758,2,0.0019990004997501,False
+12 late-reference traversals,RSC->CA1,1,-0.0121237053305322,1,1.0,False

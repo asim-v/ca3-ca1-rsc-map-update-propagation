@@ -8,18 +8,28 @@ import json
 from pathlib import Path
 
 import pandas as pd
+import numpy as np
 
 
 REGIONS = ["CA3", "CA1", "RSC"]
 KEYS = ["subject", "file", "block", "direction"]
 
 
+def benjamini_hochberg(p_values: np.ndarray) -> np.ndarray:
+    order = np.argsort(p_values)
+    ranked = p_values[order]
+    adjusted = ranked * len(ranked) / np.arange(1, len(ranked) + 1)
+    adjusted = np.minimum.accumulate(adjusted[::-1])[::-1]
+    result = np.empty_like(adjusted)
+    result[order] = np.minimum(adjusted, 1.0)
+    return result
+
+
 def summarize(name: str, path: Path) -> dict:
     table = pd.read_csv(path)
     metadata = json.loads((path.parent / "map_maturity_summary.json").read_text(encoding="utf-8"))
-    table["early_registered"] = table["early_identity_null_p"].le(0.05) & table[
-        "early_spatial_null_p"
-    ].le(0.05)
+    combined_p = table[["early_identity_null_p", "early_spatial_null_p"]].max(axis=1)
+    table["early_registered"] = benjamini_hochberg(combined_p.to_numpy(float)) <= 0.05
     table["early_margin"] = table["early_five_mean"] - table[
         ["early_identity_null_q95", "early_spatial_null_q95"]
     ].max(axis=1)

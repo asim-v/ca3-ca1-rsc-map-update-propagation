@@ -3,7 +3,7 @@
   "n_sessions": 12,
   "n_curves_per_region": 24,
   "early_registered_counts": {
-    "CA1": 22,
+    "CA1": 21,
     "CA3": 13,
     "RSC": 15
   },
