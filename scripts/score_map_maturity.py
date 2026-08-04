@@ -17,6 +17,7 @@ import numpy as np
 import pandas as pd
 from pynwb import NWBHDF5IO
 from scipy.optimize import curve_fit
+from scipy.stats import rankdata
 
 from audit_map_reliability import (
     REGION_RULES,
@@ -43,6 +44,10 @@ def fit_maturity_curve(
     y: np.ndarray,
     early_null_q95: float,
     early_null_p: float,
+    early_spatial_null_q95: float,
+    early_spatial_null_p: float,
+    monotonic_trend_rho: float,
+    monotonic_trend_p: float,
 ) -> dict[str, float | str | bool]:
     finite = np.isfinite(x) & np.isfinite(y)
     x = x[finite]
@@ -79,13 +84,22 @@ def fit_maturity_curve(
     low, amplitude, midpoint, scale = (float(value) for value in parameters)
     r_squared = 1.0 - sigmoid_rss / constant_rss if constant_rss > 0 else np.nan
     midpoint_interior = (midpoint > x.min() + 1) and (midpoint < x.max() - 1)
-    midpoint_usable = bool(amplitude >= 0.10 and sigmoid_aic <= constant_aic - 2 and midpoint_interior)
+    midpoint_usable = bool(
+        amplitude >= 0.10
+        and sigmoid_aic <= constant_aic - 2
+        and midpoint_interior
+        and monotonic_trend_p <= 0.05
+    )
 
     early_mean = float(np.mean(y[x <= np.sort(x)[min(4, len(x) - 1)]]))
     late_mean = float(np.mean(y[x >= np.sort(x)[max(0, len(x) - 5)]]))
     if midpoint_usable:
         status = "detectable_transition"
-    elif early_mean >= late_mean - 0.10 and early_mean > early_null_q95:
+    elif (
+        early_mean >= late_mean - 0.10
+        and early_mean > early_null_q95
+        and early_mean > early_spatial_null_q95
+    ):
         status = "present_from_first_observed_traversals"
     else:
         status = "unresolved_nonmonotonic_or_weak"
@@ -106,6 +120,10 @@ def fit_maturity_curve(
         "late_minus_early": late_mean - early_mean,
         "early_identity_null_q95": early_null_q95,
         "early_identity_null_p": early_null_p,
+        "early_spatial_null_q95": early_spatial_null_q95,
+        "early_spatial_null_p": early_spatial_null_p,
+        "monotonic_trend_rho": monotonic_trend_rho,
+        "monotonic_trend_p": monotonic_trend_p,
         "n_scores": int(len(x)),
     }
 
@@ -133,6 +151,20 @@ def analyze_session(
         speed = np.asarray(behavior["Speed"].data[:]).squeeze()
         units = nwb.units.to_dataframe()
         traversals = detect_traversals(position, timestamps, 0.15, 0.85, 0.70, 120.0)
+        traversal_behavior = []
+        for traversal in traversals:
+            start = int(traversal["start_sample"])
+            stop = int(traversal["stop_sample"]) + 1
+            trial_speed = speed[start:stop]
+            moving_speed = trial_speed[np.isfinite(trial_speed) & (trial_speed > speed_threshold)]
+            traversal_behavior.append(
+                {
+                    "duration_seconds": float(timestamps[stop - 1] - timestamps[start]),
+                    "moving_speed_mean": float(np.mean(moving_speed)) if len(moving_speed) else np.nan,
+                    "moving_speed_median": float(np.median(moving_speed)) if len(moving_speed) else np.nan,
+                    "moving_sample_fraction": float(np.mean(trial_speed > speed_threshold)),
+                }
+            )
 
         region_units = {region: units.loc[selector(units)] for region, selector in REGION_RULES.items()}
         n_equal = min(len(table) for table in region_units.values())
@@ -213,29 +245,71 @@ def analyze_session(
                                 "is_late_reference_traversal": bool(trial_index in late),
                                 "n_cells_available": len(table),
                                 "n_cells_equalized": n_equal,
+                                **traversal_behavior[trial_index],
                             }
                         )
                     observed_early = float(np.nanmean(direction_scores[:5]))
-                    null_early = []
+                    identity_null_early = []
+                    spatial_null_early = []
                     for _ in range(n_nulls):
                         subset = rng.choice(len(table), size=n_equal, replace=False)
                         permuted_reference = rng.permutation(subset)
-                        null_values = [
+                        identity_values = [
                             centered_map_correlation(
                                 single_maps[trial_index][subset],
                                 full_reference[permuted_reference],
                             )
                             for trial_index in matching[:5]
                         ]
-                        null_early.append(float(np.nanmean(null_values)))
-                    finite_null = np.asarray(null_early)[np.isfinite(null_early)]
-                    null_q95 = float(np.quantile(finite_null, 0.95))
-                    null_p = float((1 + np.sum(finite_null >= observed_early)) / (len(finite_null) + 1))
+                        identity_null_early.append(float(np.nanmean(identity_values)))
+
+                        shifted_reference = full_reference[subset].copy()
+                        for row_index in range(len(shifted_reference)):
+                            shift = int(rng.integers(1, n_bins))
+                            shifted_reference[row_index] = np.roll(shifted_reference[row_index], shift)
+                        spatial_values = [
+                            centered_map_correlation(
+                                single_maps[trial_index][subset],
+                                shifted_reference,
+                            )
+                            for trial_index in matching[:5]
+                        ]
+                        spatial_null_early.append(float(np.nanmean(spatial_values)))
+
+                    finite_identity_null = np.asarray(identity_null_early)[np.isfinite(identity_null_early)]
+                    identity_null_q95 = float(np.quantile(finite_identity_null, 0.95))
+                    identity_null_p = float(
+                        (1 + np.sum(finite_identity_null >= observed_early))
+                        / (len(finite_identity_null) + 1)
+                    )
+                    finite_spatial_null = np.asarray(spatial_null_early)[np.isfinite(spatial_null_early)]
+                    spatial_null_q95 = float(np.quantile(finite_spatial_null, 0.95))
+                    spatial_null_p = float(
+                        (1 + np.sum(finite_spatial_null >= observed_early))
+                        / (len(finite_spatial_null) + 1)
+                    )
+
+                    curve = np.asarray(direction_scores)
+                    finite_curve = curve[np.isfinite(curve)]
+                    traversal_rank = np.arange(len(finite_curve), dtype=float)
+                    score_rank = rankdata(finite_curve)
+                    trend_rho = float(np.corrcoef(traversal_rank, score_rank)[0, 1])
+                    null_rho = np.asarray(
+                        [
+                            np.corrcoef(traversal_rank, rng.permutation(score_rank))[0, 1]
+                            for _ in range(n_nulls)
+                        ]
+                    )
+                    trend_p = float((1 + np.sum(null_rho >= trend_rho)) / (len(null_rho) + 1))
                     fit = fit_maturity_curve(
                         np.arange(1, len(direction_scores) + 1, dtype=float),
                         np.asarray(direction_scores),
-                        null_q95,
-                        null_p,
+                        identity_null_q95,
+                        identity_null_p,
+                        spatial_null_q95,
+                        spatial_null_p,
+                        trend_rho,
+                        trend_p,
                     )
                     fit_rows.append(
                         {

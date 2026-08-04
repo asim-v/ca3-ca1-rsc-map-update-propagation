@@ -28,12 +28,14 @@ For each session, direction, and region:
 
 A midpoint is considered usable only when the fitted increase is at least
 0.10 correlation units, the sigmoid improves AIC over a constant model by at
-least 2, and its midpoint is not within one traversal of either boundary. If
-these conditions fail, the map is classified as present from the first
-observed traversals only if the first-five mean is within 0.10 of the last-five
-mean and exceeds the 95th percentile of 500 cell-identity permutation nulls.
-Otherwise the trajectory is marked unresolved. These rules prevent a timing
-estimate from being forced onto flat, low-similarity, or irregular curves.
+least 2, its midpoint is not within one traversal of either boundary, and a
+one-sided 500-permutation rank-trend test has `p <= 0.05`. If these conditions
+fail, the map is classified as present from the first observed traversals only
+if the first-five mean is within 0.10 of the last-five mean and exceeds the
+95th percentile of both cell-identity and independent within-cell spatial-shift
+nulls. Otherwise the trajectory is marked unresolved. These rules prevent a
+timing estimate from being forced onto flat, low-similarity, or irregular
+curves and require early evidence to retain spatial registration.
 
 Five- and nine-traversal windows remain required sensitivities. Neither window
 width is interpreted as a biological timescale.
