@@ -1,0 +1,16 @@
+subject,date,file,session_description,n_units_total,n_ca1_pyramidal,n_ca3_pyramidal,n_rsc_non_narrow,behavior_samples,behavior_duration_minutes,maximum_timestamp_gap_seconds,n_behavior_blocks,is_two_maze,n_traversals,traversals_by_block,speed_fraction_above_2_5,eligible_region_counts,eligible_behavior
+M01,20240312,sub-M01_ses-20240312T100000_behavior+ecephys.nwb,Novel Maze Session with Pre and Post sleep,430,142,21,116,47619,31.7466,0.0648,1,False,71,71,0.374,True,True
+M01,20240313,sub-M01_ses-20240313T100000_behavior+ecephys.nwb,Novel Maze Session with Pre and Post sleep,240,85,27,31,40708,27.1388,0.0408,1,False,80,80,0.3439,True,True
+M01,20240314,sub-M01_ses-20240314T100000_behavior+ecephys.nwb,Novel Maze Session with Pre and Post sleep,222,67,28,36,35684,23.7894,0.0408,1,False,116,116,0.4221,True,True
+M01,20240318,sub-M01_ses-20240318T100000_behavior+ecephys.nwb,Novel Maze Session with Pre and Post sleep,212,74,11,38,58213,40.9451,128.1541,2,True,112,58;54,0.4008,True,True
+M02,20240312,sub-M02_ses-20240312T100000_behavior+ecephys.nwb,Novel Maze Session with Pre and Post sleep,110,63,18,7,47270,31.5146,0.0988,1,False,71,71,0.3988,True,True
+M02,20240313,sub-M02_ses-20240313T100000_behavior+ecephys.nwb,Novel Maze Session with Pre and Post sleep,331,173,37,54,51357,34.2378,0.0411,1,False,108,108,0.4378,True,True
+M02,20240314,sub-M02_ses-20240314T100000_behavior+ecephys.nwb,Novel Maze Session with Pre and Post sleep,333,156,31,60,47746,31.8311,0.062,1,False,98,98,0.394,True,True
+M02,20240318,sub-M02_ses-20240318T100000_behavior+ecephys.nwb,Novel Maze Session with Pre and Post sleep,150,78,19,19,67722,47.1413,119.4024,2,True,96,43;53,0.4021,True,True
+M03,20240621,sub-M03_ses-20240621T100000_behavior+ecephys.nwb,Novel Maze Session with Pre and Post sleep,247,91,39,61,85484,56.9901,0.0444,1,False,87,87,0.2934,True,True
+M03,20240622,sub-M03_ses-20240622T100000_behavior+ecephys.nwb,Novel Maze Session with Pre and Post sleep,237,88,42,51,84938,56.6263,0.0493,1,False,89,89,0.3059,True,True
+M03,20240623,sub-M03_ses-20240623T100000_behavior+ecephys.nwb,Novel Maze Session with Pre and Post sleep,319,133,51,70,55066,36.7136,0.0783,1,False,84,84,0.3947,True,True
+M03,20240624,sub-M03_ses-20240624T100000_behavior+ecephys.nwb,Novel Maze Session with Pre and Post sleep,282,123,44,62,47392,31.9647,22.2127,2,True,85,46;39,0.4273,True,True
+M05,20240729,sub-M05_ses-20240729T100000_behavior+ecephys.nwb,Novel Maze Session with Pre and Post sleep,372,72,128,100,58155,38.77,0.0418,1,False,98,98,0.4233,True,True
+M05,20240730,sub-M05_ses-20240730T100000_behavior+ecephys.nwb,Novel Maze Session with Pre and Post sleep,278,44,113,67,59182,39.4557,0.0447,1,False,77,77,0.3988,True,True
+M05,20240731,sub-M05_ses-20240731T100000_behavior+ecephys.nwb,Novel Maze Session with Pre and Post sleep,317,57,141,55,65115,43.2786,0.0408,1,False,93,93,0.3766,True,True

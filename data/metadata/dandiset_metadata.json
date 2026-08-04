@@ -1,0 +1,189 @@
+{
+  "id": "DANDI:001695/0.260319.2023",
+  "doi": "10.48324/dandi.001695/0.260319.2023",
+  "url": "https://dandiarchive.org/dandiset/001695/0.260319.2023",
+  "name": "High-density extracellular recordings (Neuropixels/SiNAPS) of Hippocampal-Cortical dynamics during spatial behavior.",
+  "about": [],
+  "access": [
+    {
+      "status": "dandi:OpenAccess",
+      "schemaKey": "AccessRequirements"
+    }
+  ],
+  "license": [
+    "spdx:CC-BY-4.0"
+  ],
+  "version": "0.260319.2023",
+  "@context": "https://raw.githubusercontent.com/dandi/schema/master/releases/0.7.0/context.json",
+  "citation": "Gonzalez, Joaquin; Voroslakos, Mihaly (2026) High-density extracellular recordings (Neuropixels/SiNAPS) of Hippocampal-Cortical dynamics during spatial behavior (Version 0.260319.2023) [Data set]. DANDI Archive. https://doi.org/10.48324/dandi.001695/0.260319.2023",
+  "schemaKey": "Dandiset",
+  "identifier": "DANDI:001695",
+  "repository": "https://dandiarchive.org",
+  "contributor": [
+    {
+      "name": "Gonzalez, Joaquin",
+      "email": "joaqgonzar@gmail.com",
+      "roleName": [
+        "dcite:ContactPerson",
+        "dcite:Author"
+      ],
+      "schemaKey": "Person",
+      "identifier": "0000-0002-8721-4292",
+      "affiliation": [],
+      "includeInCitation": true
+    },
+    {
+      "name": "Voroslakos, Mihaly",
+      "email": "voroslakos@gmail.com",
+      "roleName": [
+        "dcite:ContactPerson",
+        "dcite:Author"
+      ],
+      "schemaKey": "Person",
+      "identifier": "0000-0002-1022-1355",
+      "includeInCitation": true
+    },
+    {
+      "name": "National Institute on Drug Abuse",
+      "roleName": [
+        "dcite:Funder"
+      ],
+      "schemaKey": "Organization",
+      "identifier": "https://ror.org/00fq5cm18",
+      "awardNumber": "RF1DA056394"
+    },
+    {
+      "name": "National Institute of Mental Health",
+      "schemaKey": "Organization",
+      "identifier": "https://ror.org/04xeg9z08",
+      "awardNumber": "P50MH132642"
+    },
+    {
+      "name": "National Institute of Mental Health",
+      "roleName": [
+        "dcite:Funder"
+      ],
+      "schemaKey": "Organization",
+      "identifier": "https://ror.org/04xeg9z08",
+      "awardNumber": "R01-MH139352"
+    },
+    {
+      "name": "National Institute of Mental Health",
+      "roleName": [
+        "dcite:Funder"
+      ],
+      "schemaKey": "Organization",
+      "identifier": "https://ror.org/04xeg9z08",
+      "awardNumber": "R01MH122391"
+    },
+    {
+      "name": "National Institute of Neurological Disorders and Stroke",
+      "roleName": [
+        "dcite:Funder"
+      ],
+      "schemaKey": "Organization",
+      "identifier": "https://ror.org/01s5ya894",
+      "awardNumber": "U19NS107616"
+    },
+    {
+      "name": "National Institute of Neurological Disorders and Stroke",
+      "roleName": [
+        "dcite:Funder"
+      ],
+      "schemaKey": "Organization",
+      "identifier": "https://ror.org/01s5ya894",
+      "awardNumber": "NS142069"
+    }
+  ],
+  "dateCreated": "2026-01-13T19:21:35.207654+00:00",
+  "description": "Overview This dataset provides high-density, simultaneous extracellular recordings from the mouse hippocampal formation (DG, CA1, CA2, CA3) and the retrosplenial cortex (RSC). The data captures large-scale neural dynamics across homecage rest, spatial navigation, and sensory stimulation.\n\nMethodology:\nProbes: Recordings were performed using Neuropixels 2.0 (CA3, CA1, RSC) and 1024-channel SiNAPS probes (DG, CA3, CA2, CA1).\nBehavioral Paradigms: Neuropixels sessions include PRE-rest, Maze navigation (Novel or 2-maze configurations), and POST-rest homecage recordings. A subset of animals includes head-fixed odor stimulation.\nSiNAPS sessions include High-density head-fixed recordings.\n\nData Included:\nSorted isolated units (Spikes).\nLocal Field Potentials (LFP), specifically including single-channel traces from ripple-detection sites.\nBehavioral tracking variables (position, velocity, sleep periods, sharp-wave ripple times).\n\n",
+  "publishedBy": {
+    "id": "urn:uuid:8c10c553-5618-4545-90a3-5e4a559f228e",
+    "name": "DANDI publish",
+    "endDate": "2026-03-19T20:23:08.709093+00:00",
+    "schemaKey": "PublishActivity",
+    "startDate": "2026-03-19T20:23:08.709093+00:00",
+    "wasAssociatedWith": [
+      {
+        "id": "urn:uuid:4da8b66a-d203-4b5d-9159-de84a6e2be14",
+        "name": "DANDI API",
+        "version": "0.1.0",
+        "schemaKey": "Software",
+        "identifier": "RRID:SCR_017571"
+      }
+    ]
+  },
+  "assetsSummary": {
+    "species": [
+      {
+        "name": "Mus musculus - House mouse",
+        "schemaKey": "SpeciesType",
+        "identifier": "http://purl.obolibrary.org/obo/NCBITaxon_10090"
+      }
+    ],
+    "approach": [
+      {
+        "name": "behavioral approach",
+        "schemaKey": "ApproachType"
+      },
+      {
+        "name": "electrophysiological approach",
+        "schemaKey": "ApproachType"
+      }
+    ],
+    "schemaKey": "AssetsSummary",
+    "dataStandard": [
+      {
+        "name": "Neurodata Without Borders (NWB)",
+        "schemaKey": "StandardsType",
+        "identifier": "RRID:SCR_015242"
+      }
+    ],
+    "numberOfBytes": 3088305774,
+    "numberOfFiles": 22,
+    "numberOfSubjects": 6,
+    "variableMeasured": [
+      "ElectrodeGroup",
+      "Units",
+      "ElectricalSeries",
+      "Position",
+      "SpatialSeries",
+      "ProcessingModule",
+      "LFP"
+    ],
+    "measurementTechnique": [
+      {
+        "name": "multi electrode extracellular electrophysiology recording technique",
+        "schemaKey": "MeasurementTechniqueType"
+      },
+      {
+        "name": "spike sorting technique",
+        "schemaKey": "MeasurementTechniqueType"
+      },
+      {
+        "name": "behavioral technique",
+        "schemaKey": "MeasurementTechniqueType"
+      },
+      {
+        "name": "surgical technique",
+        "schemaKey": "MeasurementTechniqueType"
+      },
+      {
+        "name": "analytical technique",
+        "schemaKey": "MeasurementTechniqueType"
+      },
+      {
+        "name": "signal filtering technique",
+        "schemaKey": "MeasurementTechniqueType"
+      }
+    ]
+  },
+  "datePublished": "2026-03-19T20:23:08.709093+00:00",
+  "schemaVersion": "0.7.0",
+  "ethicsApproval": [],
+  "wasGeneratedBy": [],
+  "relatedResource": [],
+  "manifestLocation": [
+    "https://dandiarchive.s3.amazonaws.com/dandisets/001695/0.260319.2023/assets.yaml"
+  ]
+}

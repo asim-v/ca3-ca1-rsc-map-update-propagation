@@ -1,0 +1,35 @@
+{
+  "sessions": 15,
+  "subjects": [
+    "M01",
+    "M02",
+    "M03",
+    "M05"
+  ],
+  "single_maze_sessions": 12,
+  "two_maze_sessions": 3,
+  "sessions_with_three_regions": 15,
+  "sessions_with_at_least_20_traversals": 15,
+  "units": {
+    "CA1 pyramidal": {
+      "min": 44,
+      "median": 85.0,
+      "max": 173
+    },
+    "CA3 pyramidal": {
+      "min": 11,
+      "median": 37.0,
+      "max": 141
+    },
+    "RSC non-narrow": {
+      "min": 7,
+      "median": 55.0,
+      "max": 116
+    }
+  },
+  "traversals": {
+    "min": 71,
+    "median": 89.0,
+    "max": 116
+  }
+}

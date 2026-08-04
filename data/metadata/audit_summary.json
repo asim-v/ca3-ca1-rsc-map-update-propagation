@@ -1,0 +1,24 @@
+{
+  "dandiset": "001695",
+  "version": "0.260319.2023",
+  "doi": "10.48324/dandi.001695/0.260319.2023",
+  "asset_count": 22,
+  "total_size_bytes": 3088305774,
+  "subjects": [
+    "M01",
+    "M02",
+    "M03",
+    "M05",
+    "NN_syn_M02",
+    "NN_syn_M05"
+  ],
+  "behavior_assets": 15,
+  "maze_assets": 15,
+  "novel_maze_assets": 15,
+  "two_maze_assets": 0,
+  "session_descriptions": {
+    "Head Fix Session with Odor Stimulation": 4,
+    "Novel Maze Session with Pre and Post sleep": 15,
+    "Head-fix SiNAPS Recording": 3
+  }
+}

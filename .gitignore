@@ -1,0 +1,18 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Raw public data are downloaded reproducibly, never versioned.
+data/raw/*
+!data/raw/.gitkeep
+
+# Derived large/intermediate artifacts.
+outputs/intermediate/*
+!outputs/intermediate/.gitkeep
+
+# Reproducible local QC products; the consolidated audit figure is versioned.
+outputs/pilot_inventory/
+outputs/navigation_audit/
+outputs/traversal_audit/
