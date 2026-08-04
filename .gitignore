@@ -16,3 +16,4 @@ outputs/intermediate/*
 outputs/pilot_inventory/
 outputs/navigation_audit/
 outputs/traversal_audit/
+outputs/quality/pilot_*

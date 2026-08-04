@@ -50,6 +50,7 @@ learning of a new map.
 - `scripts/download_asset.py`: checksum-verified download of a selected NWB.
 - `scripts/inspect_nwb.py`: NWB inventory and unit counts by area/cell type.
 - `scripts/calibrate_map_maturity.py`: synthetic, effect-blind estimator check.
+- `scripts/audit_map_reliability.py`: late-map occupancy and reliability gate.
 - `data/metadata/`: small, versioned audit tables and source metadata.
 - `data/raw/`: ignored public NWB files.
 - `outputs/`: derived audit and analysis artifacts.
@@ -82,7 +83,8 @@ No raw data are redistributed by this repository.
 ## Current status
 
 The complete navigation subset has been downloaded and audited locally. No
-CA3-versus-CA1-versus-RSC neural ordering has been inspected. The provisional
-single-traversal map-maturity estimator and its synthetic calibration are
-documented in `docs/estimator_calibration.md`; behavior-only occupancy and
-region-blind reliability gates remain before the estimator is final.
+CA3-versus-CA1-versus-RSC neural ordering has been inspected. The
+single-traversal map-maturity estimator, its synthetic calibration, and the
+effect-blind occupancy/reliability gate are documented in
+`docs/estimator_calibration.md`. All sessions passed the primary gate; regional
+onset scoring is next.

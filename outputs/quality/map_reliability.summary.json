@@ -1,0 +1,36 @@
+{
+  "n_files": 15,
+  "n_rows": 108,
+  "parameters": {
+    "n_bins": 24,
+    "late_traversals": 10,
+    "speed_threshold": 2.5
+  },
+  "status_counts": {
+    "ok": 108
+  },
+  "occupied_bin_fraction_minimum": 0.875,
+  "reliability_by_region": [
+    {
+      "region": "CA1",
+      "count": 36,
+      "min": 0.1891892164319756,
+      "median": 0.5881424982543009,
+      "max": 0.8588083384280459
+    },
+    {
+      "region": "CA3",
+      "count": 36,
+      "min": 0.06615543219690966,
+      "median": 0.4840731818724371,
+      "max": 0.7514116460742852
+    },
+    {
+      "region": "RSC",
+      "count": 36,
+      "min": 0.056421075524342716,
+      "median": 0.4053328987342283,
+      "max": 0.8423484570199313
+    }
+  ]
+}

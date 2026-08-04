@@ -4,10 +4,8 @@
 - [x] M1 — Audit every DANDI asset and classify spatial session types.
 - [x] M2 — Verify one pilot NWB end to end without inspecting the target effect.
 - [x] M3 — Construct the session ledger and verify three-region/traversal support.
-- [ ] M4 — Freeze the map-maturity estimator and eligibility thresholds without
-      inspecting the regional ordering result. Synthetic calibration is
-      complete; behavior-only occupancy and region-blind reliability gates
-      remain.
+- [x] M4 — Freeze the map-maturity estimator and eligibility thresholds without
+      inspecting the regional ordering result.
 - [ ] M5 — Produce position-, direction-, speed-, and occupancy-matched regional
       maze scores.
 - [ ] M6 — Run onset and cross-area lag analyses with prespecified nulls.

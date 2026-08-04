@@ -48,17 +48,30 @@ checked against the final paper and sensitivity-tested before inference.
 4. **Cell-count imbalance:** regional comparisons require within-session
    equal-unit resampling or a reliability-normalized statistic.
 5. **No effect has been inspected:** the completed work covers metadata,
-   behavior, unit counts, and traversal detection only.
+   behavior, unit counts, traversal detection, and late-map reliability only.
 
-## Next decision gate
+## Effect-blind late-map gate
 
-Before computing regional ordering, freeze a map-maturity estimator that:
+Every navigation session supplied ten late traversals per direction and at
+least 87.5% occupied position bins. Spearman-Brown corrected odd/even
+late-map reliability was positive in every region/direction/block. Across 36
+direction/block observations per region, median reliability was 0.59 in CA1,
+0.48 in CA3, and 0.41 in RSC. These values are quality measurements, not tests
+of regional onset.
+
+All 12 novel sessions remain in the primary cohort. A prespecified sensitivity
+requires a session-level minimum reliability of 0.15; this gate was fixed
+without computing any early-traversal score.
+
+## Frozen decision gate
+
+The map-maturity estimator now:
 
 - treats running directions separately;
 - uses only movement samples;
 - learns a late-session template without evaluating it on the same traversals;
 - equalizes cell-count support across regions;
-- returns one value per traversal window and ultimately one contrast per mouse;
+- returns one value per traversal and ultimately one contrast per mouse;
 - is calibrated on label/time-shift nulls and same-session split reliability.
 
 The consolidated ledger is in

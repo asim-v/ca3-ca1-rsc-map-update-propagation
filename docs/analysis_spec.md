@@ -15,9 +15,10 @@ A session can enter development only if it has:
 - enough movement samples and repeated traversals in each compared maze;
 - no unresolved mismatch between neural and behavioral time bases.
 
-The confirmatory cohort and minimum unit/traversal thresholds will be frozen
-only after a metadata-and-quality audit that does not inspect the proposed
-cross-area effect.
+The confirmatory cohort was frozen after a metadata-and-quality audit that did
+not inspect early-traversal scores or the proposed cross-area ordering. All 12
+novel-maze sessions passed: each direction supplied ten late traversals, at
+least 87.5% of bins were occupied, and late-map reliability was positive.
 
 ## Stage 2: regional map-change score
 

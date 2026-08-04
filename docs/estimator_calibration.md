@@ -7,7 +7,7 @@ specified. `scripts/calibrate_map_maturity.py` tests the estimator on synthetic
 place-cell populations whose transition midpoint is known. The simulation does
 not read spikes from DANDI:001695.
 
-## Provisional endpoint
+## Locked primary endpoint
 
 For each session, direction, and region:
 
@@ -42,15 +42,23 @@ expected property of the nonlinear map-to-correlation relationship; absolute
 midpoint values are descriptive, while paired regional differences are the
 target estimand.
 
-## Remaining lock before neural effect inspection
+## Effect-blind quality gate
 
-The endpoint becomes final only after behavior-only occupancy checks and
-region-blind late-map split-half reliability checks determine whether every
-session supplies a usable reference. A session cannot be included or excluded
-based on its CA3-versus-CA1-versus-RSC ordering.
+All 15 navigation sessions supplied at least ten late traversals per direction,
+at least 87.5% occupied spatial bins, and positive late-map split-half
+reliability in every region/direction/block. All 12 novel-maze sessions
+therefore enter the primary analysis. No session will be excluded based on its
+CA3-versus-CA1-versus-RSC ordering.
+
+The primary analysis carries measurement uncertainty without a hard
+reliability exclusion. A prespecified sensitivity requires every regional,
+directional late-map reliability in a session to be at least 0.15. This cutoff
+was set before early-traversal or regional-onset scores were computed.
 
 Generated artifacts:
 
 - `outputs/calibration/estimator_calibration.png`
 - `outputs/calibration/estimator_recovery.csv`
 - `outputs/calibration/calibration_summary.json`
+- `outputs/quality/map_reliability.csv`
+- `outputs/quality/map_reliability.summary.json`
