@@ -61,7 +61,10 @@ curve-level null. Aggregate curve effects by median within mouse and then mean
 across mice; obtain the group null by sampling one circular null per curve.
 Test CA3-to-CA1 and CA1-to-RSC as planned directions and CA1-to-CA3 and
 RSC-to-CA1 as reverse-direction controls. Correct the eight exploratory tests
-with Benjamini-Hochberg.
+with Benjamini-Hochberg. Label a positive gain as supported only when the
+mouse-level mean is positive, corrected `q <= 0.05`, and at least three of four
+mouse medians are positive. Circular-shift p-values are conditional tests in
+the recorded animals, not substitutes for population replication.
 
 As an explicitly exploratory localization, repeat the coupling analysis on the
 first 20 and last 20 traversals of each direction. These equal-length phase

@@ -245,6 +245,7 @@ def main() -> None:
     summary["supported_positive_gain"] = (
         summary["mouse_level_mean_delta_mse"].gt(0)
         & summary["bh_q_positive_gain_across_8_tests"].le(0.05)
+        & summary["mice_positive"].ge(3)
     )
     mouse_results = pd.concat(mouse_rows, ignore_index=True)
 
