@@ -51,6 +51,7 @@ learning of a new map.
 - `scripts/inspect_nwb.py`: NWB inventory and unit counts by area/cell type.
 - `scripts/calibrate_map_maturity.py`: synthetic, effect-blind estimator check.
 - `scripts/audit_map_reliability.py`: late-map occupancy and reliability gate.
+- `scripts/score_map_maturity.py`: frozen traversal-resolved regional score.
 - `data/metadata/`: small, versioned audit tables and source metadata.
 - `data/raw/`: ignored public NWB files.
 - `outputs/`: derived audit and analysis artifacts.

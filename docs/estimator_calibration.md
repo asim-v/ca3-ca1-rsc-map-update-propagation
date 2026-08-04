@@ -26,6 +26,14 @@ For each session, direction, and region:
    endpoint is its midpoint; the confirmatory contrast is the within-session
    difference in midpoint between regions, summarized within mouse.
 
+A midpoint is considered usable only when the fitted increase is at least
+0.10 correlation units, the sigmoid improves AIC over a constant model by at
+least 2, and its midpoint is not within one traversal of either boundary. If
+these conditions fail and the first-five mean is within 0.10 of the last-five
+mean, the map is classified as present from the first observed traversals.
+Otherwise the trajectory is marked unresolved. These rules prevent a timing
+estimate from being forced onto flat or irregular curves.
+
 Five- and nine-traversal windows remain required sensitivities. Neither window
 width is interpreted as a biological timescale.
 

@@ -7,7 +7,8 @@
 - [x] M4 — Freeze the map-maturity estimator and eligibility thresholds without
       inspecting the regional ordering result.
 - [ ] M5 — Produce position-, direction-, speed-, and occupancy-matched regional
-      maze scores.
+      maze scores. Scoring and non-forced transition rules are implemented;
+      execution on the frozen cohort remains.
 - [ ] M6 — Run onset and cross-area lag analyses with prespecified nulls.
 - [ ] M7 — Replicate across animals and complete sensitivity analyses.
 - [ ] M8 — Build figures and manuscript only if the effect survives controls.
