@@ -54,6 +54,8 @@ learning of a new map.
 - `scripts/score_map_maturity.py`: frozen traversal-resolved regional score.
 - `scripts/control_behavior_maturity.py`: nonlinear trial-level speed and
   movement-duration control.
+- `scripts/cross_area_prediction.py`: traversal-scale forward/reverse prediction
+  with mouse-level circular-shift inference.
 - `data/metadata/`: small, versioned audit tables and source metadata.
 - `data/raw/`: ignored public NWB files.
 - `outputs/`: derived audit and analysis artifacts.

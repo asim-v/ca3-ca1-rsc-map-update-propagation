@@ -51,6 +51,18 @@ beyond:
 Then test whether the component of CA1 unexplained by CA3 predicts RSC. These
 are predictive temporal relations, not causal mediation estimates.
 
+For traversal-scale coupling, fit fixed-alpha ridge models separately by
+session and direction. Compare leave-one-traversal-out error for a reduced
+model containing target history, traversal number and its square, and measured
+behavior with a full model that adds either current or previous source-region
+score. Standardize the target so error reduction is comparable across curves.
+Use every unique circular shift of the source except shifts 0 and +/-1 as the
+curve-level null. Aggregate curve effects by median within mouse and then mean
+across mice; obtain the group null by sampling one circular null per curve.
+Test CA3-to-CA1 and CA1-to-RSC as planned directions and CA1-to-CA3 and
+RSC-to-CA1 as reverse-direction controls. Correct the eight exploratory tests
+with Benjamini-Hochberg.
+
 Before interpreting a regional transition, remove the component of its
 traversal-level similarity score predicted out of sample by mean running speed,
 duration, moving-sample fraction, their squared terms, and a speed-by-duration
