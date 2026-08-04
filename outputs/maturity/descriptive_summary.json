@@ -1,0 +1,195 @@
+{
+  "n_animals": 4,
+  "n_sessions": 12,
+  "n_curves_per_region": 24,
+  "early_registered_counts": {
+    "CA1": 22,
+    "CA3": 13,
+    "RSC": 15
+  },
+  "raw_status_counts": [
+    {
+      "region": "CA1",
+      "fit_status": "detectable_transition",
+      "n": 8
+    },
+    {
+      "region": "CA1",
+      "fit_status": "present_from_first_observed_traversals",
+      "n": 8
+    },
+    {
+      "region": "CA1",
+      "fit_status": "unresolved_nonmonotonic_or_weak",
+      "n": 8
+    },
+    {
+      "region": "CA3",
+      "fit_status": "detectable_transition",
+      "n": 4
+    },
+    {
+      "region": "CA3",
+      "fit_status": "present_from_first_observed_traversals",
+      "n": 10
+    },
+    {
+      "region": "CA3",
+      "fit_status": "unresolved_nonmonotonic_or_weak",
+      "n": 10
+    },
+    {
+      "region": "RSC",
+      "fit_status": "detectable_transition",
+      "n": 2
+    },
+    {
+      "region": "RSC",
+      "fit_status": "present_from_first_observed_traversals",
+      "n": 9
+    },
+    {
+      "region": "RSC",
+      "fit_status": "unresolved_nonmonotonic_or_weak",
+      "n": 13
+    }
+  ],
+  "behavior_controlled_status_counts": [
+    {
+      "region": "CA1",
+      "adjusted_fit_status": "detectable_transition",
+      "n": 8
+    },
+    {
+      "region": "CA1",
+      "adjusted_fit_status": "present_from_first_observed_traversals",
+      "n": 9
+    },
+    {
+      "region": "CA1",
+      "adjusted_fit_status": "unresolved_nonmonotonic_or_weak",
+      "n": 7
+    },
+    {
+      "region": "CA3",
+      "adjusted_fit_status": "detectable_transition",
+      "n": 6
+    },
+    {
+      "region": "CA3",
+      "adjusted_fit_status": "present_from_first_observed_traversals",
+      "n": 10
+    },
+    {
+      "region": "CA3",
+      "adjusted_fit_status": "unresolved_nonmonotonic_or_weak",
+      "n": 8
+    },
+    {
+      "region": "RSC",
+      "adjusted_fit_status": "detectable_transition",
+      "n": 2
+    },
+    {
+      "region": "RSC",
+      "adjusted_fit_status": "present_from_first_observed_traversals",
+      "n": 9
+    },
+    {
+      "region": "RSC",
+      "adjusted_fit_status": "unresolved_nonmonotonic_or_weak",
+      "n": 13
+    }
+  ],
+  "mouse_median_early_margin": [
+    {
+      "subject": "M01",
+      "region": "CA1",
+      "early_margin": 0.12060213894125996
+    },
+    {
+      "subject": "M01",
+      "region": "CA3",
+      "early_margin": 0.06215939325537056
+    },
+    {
+      "subject": "M01",
+      "region": "RSC",
+      "early_margin": 0.038709597654589305
+    },
+    {
+      "subject": "M02",
+      "region": "CA1",
+      "early_margin": 0.02891660279306875
+    },
+    {
+      "subject": "M02",
+      "region": "CA3",
+      "early_margin": -0.006447069737745906
+    },
+    {
+      "subject": "M02",
+      "region": "RSC",
+      "early_margin": -0.0145672410273712
+    },
+    {
+      "subject": "M03",
+      "region": "CA1",
+      "early_margin": 0.04197803981981091
+    },
+    {
+      "subject": "M03",
+      "region": "CA3",
+      "early_margin": -0.010151145155339346
+    },
+    {
+      "subject": "M03",
+      "region": "RSC",
+      "early_margin": 0.06747162351574879
+    },
+    {
+      "subject": "M05",
+      "region": "CA1",
+      "early_margin": 0.02514156606762965
+    },
+    {
+      "subject": "M05",
+      "region": "CA3",
+      "early_margin": 0.039169971016208956
+    },
+    {
+      "subject": "M05",
+      "region": "RSC",
+      "early_margin": 0.04837875949119995
+    }
+  ],
+  "raw_pairing": {
+    "all_three_transition_curves": 0,
+    "ca3_ca1_comparable_curves": 3,
+    "ca3_minus_ca1_midpoints": [
+      12.388474467313266,
+      -0.7344821603634131,
+      -7.389640294070549
+    ],
+    "ca1_rsc_comparable_curves": 1,
+    "ca1_minus_rsc_midpoints": [
+      0.3367940852344802
+    ]
+  },
+  "behavior_controlled_pairing": {
+    "all_three_transition_curves": 1,
+    "ca3_ca1_comparable_curves": 5,
+    "ca3_minus_ca1_midpoints": [
+      0.37827337573606457,
+      -21.18071406755385,
+      14.106313375613428,
+      -6.698743871203306,
+      -5.403038944594858
+    ],
+    "ca1_rsc_comparable_curves": 1,
+    "ca1_minus_rsc_midpoints": [
+      -0.9009745376065901
+    ]
+  },
+  "median_cross_validated_behavior_r2": -0.10652571440430855
+}

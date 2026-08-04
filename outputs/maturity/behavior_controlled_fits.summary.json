@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "alpha": 1.0,
+    "n_nulls": 500,
+    "seed": 20260803
+  },
+  "n_curves": 72,
+  "cross_validated_behavior_r2_median": -0.10652571440430858,
+  "status_counts": [
+    {
+      "region": "CA1",
+      "adjusted_fit_status": "detectable_transition",
+      "n": 8
+    },
+    {
+      "region": "CA1",
+      "adjusted_fit_status": "present_from_first_observed_traversals",
+      "n": 9
+    },
+    {
+      "region": "CA1",
+      "adjusted_fit_status": "unresolved_nonmonotonic_or_weak",
+      "n": 7
+    },
+    {
+      "region": "CA3",
+      "adjusted_fit_status": "detectable_transition",
+      "n": 6
+    },
+    {
+      "region": "CA3",
+      "adjusted_fit_status": "present_from_first_observed_traversals",
+      "n": 10
+    },
+    {
+      "region": "CA3",
+      "adjusted_fit_status": "unresolved_nonmonotonic_or_weak",
+      "n": 8
+    },
+    {
+      "region": "RSC",
+      "adjusted_fit_status": "detectable_transition",
+      "n": 2
+    },
+    {
+      "region": "RSC",
+      "adjusted_fit_status": "present_from_first_observed_traversals",
+      "n": 9
+    },
+    {
+      "region": "RSC",
+      "adjusted_fit_status": "unresolved_nonmonotonic_or_weak",
+      "n": 13
+    }
+  ],
+  "raw_transitions": 14,
+  "behavior_adjusted_transitions": 16
+}

@@ -6,9 +6,10 @@
 - [x] M3 — Construct the session ledger and verify three-region/traversal support.
 - [x] M4 — Freeze the map-maturity estimator and eligibility thresholds without
       inspecting the regional ordering result.
-- [ ] M5 — Produce position-, direction-, speed-, and occupancy-matched regional
-      maze scores. Scoring and non-forced transition rules are implemented;
-      execution on the frozen cohort remains.
-- [ ] M6 — Run onset and cross-area lag analyses with prespecified nulls.
+- [x] M5 — Produce position-, direction-, speed-, and occupancy-matched regional
+      maze scores.
+- [ ] M6 — Run onset and cross-area lag analyses with prespecified nulls. Onset,
+      spatial, identity, traversal-order, and measured-behavior controls are
+      complete; cross-area lag analysis remains.
 - [ ] M7 — Replicate across animals and complete sensitivity analyses.
 - [ ] M8 — Build figures and manuscript only if the effect survives controls.

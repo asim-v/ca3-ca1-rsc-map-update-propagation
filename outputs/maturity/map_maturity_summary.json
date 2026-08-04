@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "seed": 20260803,
+    "n_bins": 24,
+    "late_traversals": 10,
+    "speed_threshold": 2.5,
+    "n_subsamples": 200,
+    "n_nulls": 500
+  },
+  "n_files": 12,
+  "n_subjects": 4,
+  "n_score_rows": 3219,
+  "fit_status_counts": [
+    {
+      "region": "CA1",
+      "fit_status": "detectable_transition",
+      "n": 8
+    },
+    {
+      "region": "CA1",
+      "fit_status": "present_from_first_observed_traversals",
+      "n": 8
+    },
+    {
+      "region": "CA1",
+      "fit_status": "unresolved_nonmonotonic_or_weak",
+      "n": 8
+    },
+    {
+      "region": "CA3",
+      "fit_status": "detectable_transition",
+      "n": 4
+    },
+    {
+      "region": "CA3",
+      "fit_status": "present_from_first_observed_traversals",
+      "n": 10
+    },
+    {
+      "region": "CA3",
+      "fit_status": "unresolved_nonmonotonic_or_weak",
+      "n": 10
+    },
+    {
+      "region": "RSC",
+      "fit_status": "detectable_transition",
+      "n": 2
+    },
+    {
+      "region": "RSC",
+      "fit_status": "present_from_first_observed_traversals",
+      "n": 9
+    },
+    {
+      "region": "RSC",
+      "fit_status": "unresolved_nonmonotonic_or_weak",
+      "n": 13
+    }
+  ]
+}

@@ -89,5 +89,7 @@ The complete navigation subset has been downloaded and audited locally. No
 CA3-versus-CA1-versus-RSC neural ordering has been inspected. The
 single-traversal map-maturity estimator, its synthetic calibration, and the
 effect-blind occupancy/reliability gate are documented in
-`docs/estimator_calibration.md`. All sessions passed the primary gate; regional
-onset scoring is next.
+`docs/estimator_calibration.md`. All sessions passed the primary gate. The
+frozen-cohort result and sensitivity analysis are in
+`docs/preliminary_findings.md`: early CA1 map identity is common, while a
+universal CA3-to-CA1-to-RSC onset sequence is not supported.

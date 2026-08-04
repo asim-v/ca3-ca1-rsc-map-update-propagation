@@ -17,3 +17,4 @@ outputs/pilot_inventory/
 outputs/navigation_audit/
 outputs/traversal_audit/
 outputs/quality/pilot_*
+outputs/sensitivity/*/map_maturity_scores.csv
