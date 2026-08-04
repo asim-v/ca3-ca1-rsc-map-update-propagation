@@ -38,7 +38,12 @@ def increasing_sigmoid(
     return low + amplitude / (1.0 + np.exp(-(x - midpoint) / scale))
 
 
-def fit_maturity_curve(x: np.ndarray, y: np.ndarray) -> dict[str, float | str | bool]:
+def fit_maturity_curve(
+    x: np.ndarray,
+    y: np.ndarray,
+    early_null_q95: float,
+    early_null_p: float,
+) -> dict[str, float | str | bool]:
     finite = np.isfinite(x) & np.isfinite(y)
     x = x[finite]
     y = y[finite]
@@ -80,7 +85,7 @@ def fit_maturity_curve(x: np.ndarray, y: np.ndarray) -> dict[str, float | str | 
     late_mean = float(np.mean(y[x >= np.sort(x)[max(0, len(x) - 5)]]))
     if midpoint_usable:
         status = "detectable_transition"
-    elif early_mean >= late_mean - 0.10:
+    elif early_mean >= late_mean - 0.10 and early_mean > early_null_q95:
         status = "present_from_first_observed_traversals"
     else:
         status = "unresolved_nonmonotonic_or_weak"
@@ -99,6 +104,8 @@ def fit_maturity_curve(x: np.ndarray, y: np.ndarray) -> dict[str, float | str | 
         "early_five_mean": early_mean,
         "late_five_mean": late_mean,
         "late_minus_early": late_mean - early_mean,
+        "early_identity_null_q95": early_null_q95,
+        "early_identity_null_p": early_null_p,
         "n_scores": int(len(x)),
     }
 
@@ -114,6 +121,7 @@ def analyze_session(
     late_traversals: int,
     speed_threshold: float,
     n_subsamples: int,
+    n_nulls: int,
 ) -> tuple[list[dict], list[dict]]:
     with NWBHDF5IO(str(path), "r", load_namespaces=True) as io:
         nwb = io.read()
@@ -176,6 +184,7 @@ def analyze_session(
                     if len(matching) < late_traversals:
                         continue
                     late = matching[-late_traversals:]
+                    full_reference = aggregate_rate(counts_array, occupancy_array, late)
                     direction_scores = []
                     for ordinal, trial_index in enumerate(matching, start=1):
                         reference_indices = late[late != trial_index] if trial_index in late else late
@@ -186,7 +195,8 @@ def analyze_session(
                                 for subset in subsets[region]
                             ]
                         )
-                        score = float(np.nanmedian(values))
+                        finite_values = values[np.isfinite(values)]
+                        score = float(np.median(finite_values)) if len(finite_values) else np.nan
                         direction_scores.append(score)
                         score_rows.append(
                             {
@@ -198,16 +208,34 @@ def analyze_session(
                                 "direction_traversal": ordinal,
                                 "global_traversal": int(trial_index + 1),
                                 "map_similarity": score,
-                                "subsample_q025": float(np.nanquantile(values, 0.025)),
-                                "subsample_q975": float(np.nanquantile(values, 0.975)),
+                                "subsample_q025": float(np.quantile(finite_values, 0.025)) if len(finite_values) else np.nan,
+                                "subsample_q975": float(np.quantile(finite_values, 0.975)) if len(finite_values) else np.nan,
                                 "is_late_reference_traversal": bool(trial_index in late),
                                 "n_cells_available": len(table),
                                 "n_cells_equalized": n_equal,
                             }
                         )
+                    observed_early = float(np.nanmean(direction_scores[:5]))
+                    null_early = []
+                    for _ in range(n_nulls):
+                        subset = rng.choice(len(table), size=n_equal, replace=False)
+                        permuted_reference = rng.permutation(subset)
+                        null_values = [
+                            centered_map_correlation(
+                                single_maps[trial_index][subset],
+                                full_reference[permuted_reference],
+                            )
+                            for trial_index in matching[:5]
+                        ]
+                        null_early.append(float(np.nanmean(null_values)))
+                    finite_null = np.asarray(null_early)[np.isfinite(null_early)]
+                    null_q95 = float(np.quantile(finite_null, 0.95))
+                    null_p = float((1 + np.sum(finite_null >= observed_early)) / (len(finite_null) + 1))
                     fit = fit_maturity_curve(
                         np.arange(1, len(direction_scores) + 1, dtype=float),
                         np.asarray(direction_scores),
+                        null_q95,
+                        null_p,
                     )
                     fit_rows.append(
                         {
@@ -232,6 +260,7 @@ def main() -> None:
     parser.add_argument("--late-traversals", type=int, default=10)
     parser.add_argument("--speed-threshold", type=float, default=2.5)
     parser.add_argument("--n-subsamples", type=int, default=200)
+    parser.add_argument("--n-nulls", type=int, default=500)
     parser.add_argument("--output-dir", type=Path, default=Path("outputs/maturity"))
     args = parser.parse_args()
 
@@ -246,6 +275,7 @@ def main() -> None:
             args.late_traversals,
             args.speed_threshold,
             args.n_subsamples,
+            args.n_nulls,
         )
         all_scores.extend(score_rows)
         all_fits.extend(fit_rows)
@@ -262,6 +292,7 @@ def main() -> None:
             "late_traversals": args.late_traversals,
             "speed_threshold": args.speed_threshold,
             "n_subsamples": args.n_subsamples,
+            "n_nulls": args.n_nulls,
         },
         "n_files": int(scores["file"].nunique()),
         "n_subjects": int(scores["subject"].nunique()),
