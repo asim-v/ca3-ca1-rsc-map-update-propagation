@@ -168,10 +168,13 @@ def main() -> None:
     parser.add_argument("--mouse-null-iterations", type=int, default=5000)
     parser.add_argument("--seed", type=int, default=20260803)
     parser.add_argument("--phase", choices=["all", "first20", "last20"], default="all")
+    parser.add_argument("--exclude-late-reference", action="store_true")
     parser.add_argument("--output-dir", type=Path, default=Path("outputs/cross_area"))
     args = parser.parse_args()
 
     scores = pd.read_csv(args.scores)
+    if args.exclude_late_reference:
+        scores = scores.loc[~scores["is_late_reference_traversal"].astype(bool)].copy()
     wide = scores.pivot(index=ROW_KEYS, columns="region", values="map_similarity").reset_index()
     behavior_columns = [
         "moving_speed_mean",
@@ -286,6 +289,7 @@ def main() -> None:
             "mouse_null_iterations": args.mouse_null_iterations,
             "seed": args.seed,
             "phase": args.phase,
+            "exclude_late_reference": args.exclude_late_reference,
             "lag_definition": "one same-direction traversal, approximately two physical traversals",
         },
         "results": summary.to_dict(orient="records"),

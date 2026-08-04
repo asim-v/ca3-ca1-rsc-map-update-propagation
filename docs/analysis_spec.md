@@ -68,6 +68,12 @@ first 20 and last 20 traversals of each direction. These equal-length phase
 windows are not additional confirmatory tests and may overlap in the shortest
 sessions.
 
+Because late-reference traversals participate in template construction even
+under leave-one-out scoring, the cross-area coupling claim must survive a
+strict analysis that removes all final ten reference traversals. Results that
+exist only inside the reference block are treated as estimator dependence, not
+evidence of biological propagation.
+
 Before interpreting a regional transition, remove the component of its
 traversal-level similarity score predicted out of sample by mean running speed,
 duration, moving-sample fraction, their squared terms, and a speed-by-duration
