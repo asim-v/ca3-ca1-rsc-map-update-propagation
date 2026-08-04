@@ -51,6 +51,13 @@ beyond:
 Then test whether the component of CA1 unexplained by CA3 predicts RSC. These
 are predictive temporal relations, not causal mediation estimates.
 
+Before interpreting a regional transition, remove the component of its
+traversal-level similarity score predicted out of sample by mean running speed,
+duration, moving-sample fraction, their squared terms, and a speed-by-duration
+interaction. Use fixed-alpha (`alpha = 1`) leave-one-traversal-out ridge
+prediction. Report both raw and behavior-controlled classifications; measured
+behavior is a control, not a latent behavioral-state estimate.
+
 ## Required nulls
 
 - maze labels shuffled within position × direction strata;

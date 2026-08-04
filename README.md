@@ -52,6 +52,8 @@ learning of a new map.
 - `scripts/calibrate_map_maturity.py`: synthetic, effect-blind estimator check.
 - `scripts/audit_map_reliability.py`: late-map occupancy and reliability gate.
 - `scripts/score_map_maturity.py`: frozen traversal-resolved regional score.
+- `scripts/control_behavior_maturity.py`: nonlinear trial-level speed and
+  movement-duration control.
 - `data/metadata/`: small, versioned audit tables and source metadata.
 - `data/raw/`: ignored public NWB files.
 - `outputs/`: derived audit and analysis artifacts.
