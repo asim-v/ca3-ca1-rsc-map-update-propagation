@@ -63,6 +63,11 @@ Test CA3-to-CA1 and CA1-to-RSC as planned directions and CA1-to-CA3 and
 RSC-to-CA1 as reverse-direction controls. Correct the eight exploratory tests
 with Benjamini-Hochberg.
 
+As an explicitly exploratory localization, repeat the coupling analysis on the
+first 20 and last 20 traversals of each direction. These equal-length phase
+windows are not additional confirmatory tests and may overlap in the shortest
+sessions.
+
 Before interpreting a regional transition, remove the component of its
 traversal-level similarity score predicted out of sample by mean running speed,
 duration, moving-sample fraction, their squared terms, and a speed-by-duration

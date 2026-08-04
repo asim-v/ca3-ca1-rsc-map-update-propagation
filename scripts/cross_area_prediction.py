@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import itertools
 import json
 from pathlib import Path
 
@@ -149,6 +150,15 @@ def benjamini_hochberg(p_values: np.ndarray) -> np.ndarray:
     return result
 
 
+def exact_sign_flip_p(differences: np.ndarray) -> float:
+    observed = float(np.mean(differences))
+    null = [
+        float(np.mean(differences * np.asarray(signs)))
+        for signs in itertools.product((-1.0, 1.0), repeat=len(differences))
+    ]
+    return float(np.mean(np.abs(null) >= abs(observed)))
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -157,6 +167,7 @@ def main() -> None:
     parser.add_argument("--alpha", type=float, default=1.0)
     parser.add_argument("--mouse-null-iterations", type=int, default=5000)
     parser.add_argument("--seed", type=int, default=20260803)
+    parser.add_argument("--phase", choices=["all", "first20", "last20"], default="all")
     parser.add_argument("--output-dir", type=Path, default=Path("outputs/cross_area"))
     args = parser.parse_args()
 
@@ -173,6 +184,10 @@ def main() -> None:
     rows = []
     nulls: dict[int, np.ndarray] = {}
     for key, curve in wide.groupby(CURVE_KEYS, sort=True):
+        if args.phase == "first20":
+            curve = curve.nsmallest(20, "direction_traversal")
+        elif args.phase == "last20":
+            curve = curve.nlargest(20, "direction_traversal").sort_values("direction_traversal")
         for source, target, anatomical_direction in CONNECTIONS:
             for lag in (0, 1):
                 result = analyze_curve(curve, source, target, lag, args.alpha)
@@ -215,28 +230,66 @@ def main() -> None:
                 "n_curves": int(len(subset)),
                 "n_mice": int(subset["subject"].nunique()),
                 "mouse_level_mean_delta_mse": grand_effect,
-                "mouse_level_circular_shift_p": p_value,
+                "mouse_level_circular_shift_p_relative": p_value,
+                "positive_gain_p": p_value if grand_effect > 0 else 1.0,
                 "mice_positive": int((mouse["mouse_median_delta_mse"] > 0).sum()),
             }
         )
     summary = pd.DataFrame(summaries)
-    summary["bh_q_across_8_tests"] = benjamini_hochberg(
-        summary["mouse_level_circular_shift_p"].to_numpy(float)
+    summary["bh_q_positive_gain_across_8_tests"] = benjamini_hochberg(
+        summary["positive_gain_p"].to_numpy(float)
+    )
+    summary["supported_positive_gain"] = (
+        summary["mouse_level_mean_delta_mse"].gt(0)
+        & summary["bh_q_positive_gain_across_8_tests"].le(0.05)
     )
     mouse_results = pd.concat(mouse_rows, ignore_index=True)
+
+    asymmetry_rows = []
+    for forward_source, forward_target, reverse_source, reverse_target in (
+        ("CA3", "CA1", "CA1", "CA3"),
+        ("CA1", "RSC", "RSC", "CA1"),
+    ):
+        for lag in (0, 1):
+            forward = mouse_results[
+                (mouse_results["source"] == forward_source)
+                & (mouse_results["target"] == forward_target)
+                & (mouse_results["lag_same_direction_traversals"] == lag)
+            ].set_index("subject")["mouse_median_delta_mse"]
+            reverse = mouse_results[
+                (mouse_results["source"] == reverse_source)
+                & (mouse_results["target"] == reverse_target)
+                & (mouse_results["lag_same_direction_traversals"] == lag)
+            ].set_index("subject")["mouse_median_delta_mse"]
+            differences = (forward - reverse).dropna().to_numpy(float)
+            asymmetry_rows.append(
+                {
+                    "forward_connection": f"{forward_source}->{forward_target}",
+                    "reverse_connection": f"{reverse_source}->{reverse_target}",
+                    "lag_same_direction_traversals": lag,
+                    "mean_forward_minus_reverse_delta_mse": float(np.mean(differences)),
+                    "mice_forward_greater": int(np.sum(differences > 0)),
+                    "n_mice": int(len(differences)),
+                    "exact_two_sided_sign_flip_p": exact_sign_flip_p(differences),
+                }
+            )
+    asymmetry = pd.DataFrame(asymmetry_rows)
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     curve_results.to_csv(args.output_dir / "curve_effects.csv", index=False)
     mouse_results.to_csv(args.output_dir / "mouse_effects.csv", index=False)
     summary.to_csv(args.output_dir / "summary.csv", index=False)
+    asymmetry.to_csv(args.output_dir / "directional_asymmetry.csv", index=False)
     payload = {
         "parameters": {
             "alpha": args.alpha,
             "mouse_null_iterations": args.mouse_null_iterations,
             "seed": args.seed,
+            "phase": args.phase,
             "lag_definition": "one same-direction traversal, approximately two physical traversals",
         },
         "results": summary.to_dict(orient="records"),
+        "directional_asymmetry": asymmetry.to_dict(orient="records"),
     }
     (args.output_dir / "summary.json").write_text(
         json.dumps(payload, indent=2) + "\n", encoding="utf-8"
